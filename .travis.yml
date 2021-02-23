@@ -17,14 +17,12 @@ jobs:
   include:
     - stage: build docker image
       script:
-        - docker-compose build
+        - ./bin/build
     - stage: test
       script: 
-        - docker-compose run test
+        - ./bin/test
     - stage: deploy
       if: branch = main
       script: 
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker-compose build 
-        - docker tag gotest:latest mfroes/gotest:v0.0.1
-        - docker push mfroes/gotest:v0.0.1
+        - ./bin/release

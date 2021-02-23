@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+VERSION=$(cat METADATA | jq -r '.VERSION')
+DESCRIPTION=$(cat METADATA | jq -r '.DESCRIPTION')
+COMMITSHA=$(git rev-parse --verify HEAD)
+docker-compose build --build-arg VERSION="v${VERSION}" \
+    --build-arg COMMIT_SHA="${COMMITSHA}" \
+    --build-arg APP_DESCRIPTION="${DESCRIPTION}" \
+    --build-arg BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
