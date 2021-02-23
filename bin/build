@@ -1,2 +1,9 @@
 #!/usr/bin/env sh
-docker-compose run --rm --service-ports test
+VERSION=$(cat METADATA | jq -r '.VERSION')
+DESCRIPTION=$(cat METADATA | jq -r '.DESCRIPTION')
+# COMMITSHA=$(git rev-parse --verify HEAD)
+COMMITSHA="asdfghjkloiuytre"
+docker-compose build --build-arg VERSION="v${VERSION}" \
+    --build-arg COMMIT_SHA="${COMMITSHA}" \
+    --build-arg APP_DESCRIPTION="${DESCRIPTION}" \
+    --build-arg BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
