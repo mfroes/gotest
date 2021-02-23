@@ -15,12 +15,12 @@ install:
 
 jobs:
   include:
-    - stage: build docker image
-      script:
-        - ./bin/build
     - stage: test
       script: 
         - ./bin/test
+    - stage: build docker image
+      script:
+        - ./bin/build
     - stage: deploy
       if: branch = main
       script: 
