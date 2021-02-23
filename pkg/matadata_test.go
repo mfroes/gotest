@@ -8,16 +8,17 @@ import (
 )
 
 func TestMetadata_toJSON(t *testing.T) {
-	expected := `{"version":"99.99","description":"teST dEscripTIon","lastcommitsha":"RANDOMSHA"}`
-	metadata := pkg.Metadata{
-		"99.99", "teST dEscripTIon", "RANDOMSHA",
-	}
+	expected := `{"version":"99.99","description":"teST dEscripTIon","lastcommitsha":"abc57858585"}`
+	pkg.BuildDescription = "teST dEscripTIon"
+	pkg.BuildVersion = "99.99"
+	pkg.BuildSHA = "abc57858585"
+	pkg.BuildTime = "today"
+
+	metadata := pkg.GetMetadata()
 	stringMetadata := metadata.ToJSON()
 
 	if stringMetadata != expected {
-		t.Error(
-			fmt.Printf("Incorrect JSON received:\n expected[ %v ],\n got[ %v ]", expected, stringMetadata),
-		)
-		t.FailNow()
+		t.Errorf("Incorrect JSON received:\n got [%v]\n want [%v]",
+			stringMetadata, expected)
 	}
 }
