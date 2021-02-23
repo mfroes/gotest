@@ -33,13 +33,13 @@ func TestHelloWorldRoute(t *testing.T) {
 
 	// Check the status code is what we expect.
 	if status := response.Code; status != expected.statusCode {
-		t.Errorf("returned wrong status code: got [%v] want [%v]",
+		t.Errorf("returned wrong status code:\n got  [%v]\n want [%v]",
 			status, expected.statusCode)
 	}
 
 	// Check the response body is what we expect.
 	if response.Body.String() != expected.body {
-		t.Errorf("returned unexpected body: got [%v] want [%v]",
+		t.Errorf("returned unexpected body:\n got  [%v]\n want [%v]",
 			response.Body.String(), expected.body)
 	}
 }

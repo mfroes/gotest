@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// HelloWorld is a HTTP Handler that returns "Hello World" with 200 OK
 func HelloWorld(w http.ResponseWriter, req *http.Request) {
 
 	ctx := req.Context()
