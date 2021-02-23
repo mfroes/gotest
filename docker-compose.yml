@@ -1,19 +1,22 @@
 ---
 version: "3.8"
 services:
-  build: &build
+  test:
+    build:
+      context: .
+      target: build 
+    ports:
+      - "8090:8090"
+    environment:
+      GO111MODULE: auto
+    entrypoint:
+      - go
+      - test
+    command: "./..."
+
+  server:
     image: gotest:latest
     build:
       context: .
-  shell: 
-    <<: *build
-    entrypoint:
-      - bash
-    volumes:
-      - ".:/build/src/"
-  test: 
-    <<: *build
-    entrypoint:
-      - ls
-    volumes:
-      - ".:/build/src/"
+    ports:
+      - 8090:8090
