@@ -1,0 +1,19 @@
+---
+version: "3.8"
+services:
+  build: &build
+    image: gotest:latest
+    build:
+      context: .
+  shell: 
+    <<: *build
+    entrypoint:
+      - bash
+    volumes:
+      - ".:/build/src/"
+  test: 
+    <<: *build
+    entrypoint:
+      - ls
+    volumes:
+      - ".:/build/src/"
