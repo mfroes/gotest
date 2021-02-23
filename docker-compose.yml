@@ -21,10 +21,11 @@ services:
       - ".:/build/src/"
 
   test: 
-    <<: *build
+    image: golang:1.16.0
     entrypoint:
       - go
       - test
+    working_dir: /build/src/
     volumes:
       - ".:/build/src/"
     command: "./..."

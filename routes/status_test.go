@@ -6,13 +6,18 @@ import (
 	"testing"
 
 	"github.com/mfroes/gotest/main/routes"
+	"github.com/mfroes/gotest/main/pkg"
 )
 
 func TestStatusRoute(t *testing.T) {
 	expected := httpResponse{
 		statusCode: http.StatusOK,
-		body:       `{"myapplication":[{"version": "1.0","description":"pre-interview technical test","lastcommitsha": "abc57858585"}]}`,
+		body:       `{"myapplication":[{"version":"99.99","description":"teST dEscripTIon","lastcommitsha":"abc57858585"}]}`,
 	}
+	pkg.BuildDescription = "teST dEscripTIon"
+	pkg.BuildVersion = "99.99"
+	pkg.BuildSHA = "abc57858585"
+	pkg.BuildTime = "today"
 
 	// Create a request to pass to our route/handler.
 	req, err := http.NewRequest("GET", "/status", nil)
@@ -28,7 +33,7 @@ func TestStatusRoute(t *testing.T) {
 
 	// Check the status code is what we expect.
 	if status := response.Code; status != expected.statusCode {
-		t.Errorf("returned wrong status code:\n got  [%v]\n want [%v]",
+		t.Errorf("returned wrong status code:\n got  [%v]\n want [%v]\n",
 			status, expected.statusCode)
 	}
 
