@@ -39,18 +39,23 @@ List of the technologies used.
 | Packaging                   | [Docker](https://www.docker.com/) |
 | CI Pipeline                 | [travis CI](https://travis-ci.org) |
 
+
 | Supporting tools | Description |
+| --------------------------- | ------------------------------------------------------------ |
 | [git](https://git-scm.com) | distributed version control system |
 | [docker](https://www.docker.com) | tool for building and running virtual containers |
 | [jq](https://stedolan.github.io/jq/) | lightweight command-line JSON processor |
 
 ## Project structure
 
-| ./   | project files including go |
-| bin/ | stand alone scripts that are run by the pipeline and can be run locally |
-| docs | documentation support files |
-| pkg | go project support files |
-| routes | contains all the handlers for processing http requests |
+| Directory | Description |
+| --------------------------- | ------------------------------------------------------------ |
+| ./       | project files including go |
+| bin/     | stand alone scripts that are run by the pipeline and can be run locally |
+| docs     | documentation support files |
+| pkg      | go project support files |
+| routes   | contains all the handlers for processing http requests |
+| METADATA | File containing the VERSION number and Description as requested |
 
 ## Development
 
@@ -106,6 +111,11 @@ git push
 
 10. Remember your number one priority in TBD is to not break the build.  So make sure it is all good before moving onto the next story.
 
+## Updating release number
+
+To generate a new release number, you will have to manually edit the METADATA file located in the root directoruy of the project and update the version using semantic versioning. On that file you will find the versioning and the description of the application that would be served by the /status endpooint.
+
+
 ## Packaging
 
 Packaging is done using docker.  It is automated in the pipeline but if you wish to build or run the image manually you can use the following commands.
@@ -145,8 +155,8 @@ if it were to have users manually checking i would format it, if just for scrape
 
 * because the need of setting up the metadata for the docker image(image labels), the METADATA processing is being done on a shellscript and passed as parameters to docker so it could be set as docker label.
 
-* As there doesnt seem to be a limitation on the tags/releases with the same number, i've followed the semantic version as much as i could and added a suffix to the tag names of the short git commit sha. example: v1.0.0-QWERTY and v1.0.0-YTREWQ are acceptable tags
-this was done to try and prevent conflicting tags and release numbers.
+* As there doesnt seem to be a limitation on the tags/releases with the same number, i've followed the semantic version as much as i could and also added a suffix to the tag names with the short git commit sha. example: v1.0.0.QWERTY and v1.0.0.YTREWQ are acceptable tags and will be pushed together with the v1.0.0 tag
+this was done to try prevent conflicting tags and release numbers.
 
 * At the moment there is no automatic semantic versioning done by the pipeline once application is released/merged into main. This would be a good implementation to add into the release phase of the pipeline. would probably implement by using pre-commit hooks or any tool similar.
 

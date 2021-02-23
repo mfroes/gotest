@@ -13,5 +13,7 @@ COMMITSHA=$(git rev-parse --verify HEAD)
 echo "Tagging release"
 git tag v${VERSION}-${COMMITSHA:0:7}
 echo "Releasing docker image"
-docker tag gotest:latest mfroes/gotest:v${VERSION}.${COMMITSHA:0:7}
+docker tag gotest:latest mfroes/gotest:v${VERSION}
+docker tag mfroes/gotest:v${VERSION} mfroes/gotest:v${VERSION}.${COMMITSHA:0:7}
+docker push mfroes/gotest:v${VERSION}
 docker push mfroes/gotest:v${VERSION}.${COMMITSHA:0:7}
