@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"mfroes.com/main/routes"
+	"github.com/mfroes/gotest/main/routes"
 )
 
 type httpResponse struct {

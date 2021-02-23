@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"mfroes.com/main/pkg"
+	"github.com/mfroes/gotest/main/pkg"
 )
 
 func TestMetadata_toJSON(t *testing.T) {

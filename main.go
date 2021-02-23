@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"mfroes.com/main/routes"
+	"github.com/mfroes/gotest/main/routes"
 )
 
 func main() {
