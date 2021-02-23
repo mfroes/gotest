@@ -10,6 +10,9 @@ before_install:
  - chmod +x docker-compose
  - sudo mv docker-compose /usr/local/bin
 
+install:
+  - echo "Ignoring travis install"
+
 jobs:
   include:
     - stage: build docker image
