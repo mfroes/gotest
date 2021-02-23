@@ -1,7 +1,6 @@
 package pkg_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/mfroes/gotest/main/pkg"

@@ -4,24 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
+
+	"github.com/mfroes/gotest/main/pkg"
 )
 
 // Status will return the application metadata
 func Status(w http.ResponseWriter, req *http.Request) {
-	ctx := req.Context()
-	log.Print("server: hello handler started")
-	defer log.Print("server: hello handler ended")
+	log.Print("server: Status handl	er started")
 
-	select {
-	case <-time.After(1 * time.Second):
-		fmt.Fprintf(w, "Hello World")
-	case <-ctx.Done():
+	metadata := pkg.GetMetadata()
+	stringMetadata := metadata.ToJSON()
+	response := fmt.Sprintf(`{"myapplication":[%v]}`, stringMetadata)
+	fmt.Fprintf(w, response)
 
-		err := ctx.Err()
-		log.Print("server:", err)
-		internalError := http.StatusInternalServerError
-		http.Error(w, err.Error(), internalError)
-	}
-
+	log.Print("server: Status handler ended")
 }

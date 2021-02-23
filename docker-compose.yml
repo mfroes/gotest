@@ -1,7 +1,7 @@
 ---
 version: "3.8"
 services:
-  test:
+  build: &build
     build:
       context: .
       target: build 
@@ -11,12 +11,24 @@ services:
       GO111MODULE: auto
     entrypoint:
       - go
+      - build
+    command: 
+      - "./..."
+
+  test: 
+    <<: *build
+    entrypoint:
+      - go
       - test
     command: "./..."
 
   server:
+    <<: *build
     image: gotest:latest
     build:
       context: .
+      target: dist
     ports:
       - 8090:8090
+    entrypoint:
+      - /server
