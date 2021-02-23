@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -euo pipefail
 VERSION=$(cat METADATA | jq -r '.VERSION')
 DESCRIPTION=$(cat METADATA | jq -r '.DESCRIPTION')
