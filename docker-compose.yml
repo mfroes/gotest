@@ -12,14 +12,21 @@ services:
     entrypoint:
       - go
       - build
-    command: 
-      - "./..."
+
+  shell: 
+    <<: *build
+    entrypoint:
+      - bash
+    volumes:
+      - ".:/build/src/"
 
   test: 
     <<: *build
     entrypoint:
       - go
       - test
+    volumes:
+      - ".:/build/src/"
     command: "./..."
 
   server:

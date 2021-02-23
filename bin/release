@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -e
+echo "Checking if distribution container can start"
+docker-compose run -d --rm --service-ports server
+echo "verifying that container is responding"
+curl http://localhost:8090/
+echo "stopping container"
+docker-compose stop server
+
+VERSION=$(cat METADATA | jq -r '.VERSION')
+COMMITSHA=$(git rev-parse --verify HEAD)
+echo "Tagging release"
+git tag gotest:v${VERSION}-${COMMITSHA:0:7}
+echo "Releasing docker image"
+docker tag gotest:latest gotest:v${VERSION}-${COMMITSHA:0:7}
