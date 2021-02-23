@@ -10,7 +10,7 @@ import (
 
 // Status will return the application metadata
 func Status(w http.ResponseWriter, req *http.Request) {
-	log.Print("server: Status handl	er started")
+	log.Print("server: Status handler started")
 
 	metadata := pkg.GetMetadata()
 	stringMetadata := metadata.ToJSON()
