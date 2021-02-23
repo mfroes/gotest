@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 set -e
+docker-compose build
 echo "Checking if distribution container can start"
 docker-compose run -d --rm --service-ports server
 echo "verifying that container is responding"
@@ -12,4 +13,5 @@ COMMITSHA=$(git rev-parse --verify HEAD)
 echo "Tagging release"
 git tag gotest:v${VERSION}-${COMMITSHA:0:7}
 echo "Releasing docker image"
-docker tag gotest:latest gotest:v${VERSION}-${COMMITSHA:0:7}
+docker tag gotest:latest mfroes/gotest:v${VERSION}-${COMMITSHA:0:7}
+docker push mfroes/gotest:v${VERSION}-${COMMITSHA:0:7}
